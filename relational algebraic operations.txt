@@ -1,0 +1,90 @@
+Shop Fresh - The Online Grocery Store
+SQL queries involving relational algebraic operations
+Name: Nishant Singh (solo project)
+Roll Number: 2022328
+
+-- 1.) Query to Retrieve User Information with Address:
+SELECT User.FirstName, User.LastName, Address.Street, Address.City, Address.State, Address.ZipCode
+FROM User
+INNER JOIN Address ON User.UserID = Address.UserID;
+
+-- 2.) Query to Update Delivery Executive's Mode of Transport:
+UPDATE DeliveryExecutive
+SET ModeOfTransport = 'Scooter'
+WHERE DeliveryExecutiveID = 3;
+
+-- 3.) Query to Calculate Total Amount of an Order and then Update the Total Amount in the Orders table:
+UPDATE Orders AS O
+JOIN (
+    SELECT OrderID, SUM(QuantityToOrder * Price) AS TotalAmt
+    FROM Product_Cart_Orders
+    JOIN Product ON Product_Cart_Orders.ProductID = Product.ProductID
+    GROUP BY OrderID
+) AS PCO ON O.OrderID = PCO.OrderID
+SET O.TotalAmount = PCO.TotalAmt;
+
+-- 4.) Query to Apply a Discount Code to an Order:
+INSERT INTO Orders_Apply_Code_Discount (OrderID, DiscountID)
+VALUES (2, 3);
+
+-- 5.) Query to Retrieve Retailer's Contact Information with Stock Modified by them:
+SELECT Retailer.ContactNo, Retailer.Street, Retailer.City, Retailer.State, Retailer.ZipCode, Product.Name, Retailer_Modify_stock_Product.QuantityToAdd, Retailer_Modify_stock_Product.QuantityToRemove
+FROM Retailer
+JOIN Retailer_Modify_stock_Product ON Retailer.RetailerID = Retailer_Modify_stock_Product.RetailerID
+JOIN Product ON Retailer_Modify_stock_Product.ProductID = Product.ProductID;
+
+-- 6.) Query to Find Average Rating of Delivery Executives and then Update the Average Rating in the Delivery Executive table:
+UPDATE DeliveryExecutive AS DE
+JOIN (
+    SELECT DeliveryExecutiveID, AVG(StarsGiven) AS AvgRating
+    FROM User_Rating_DeliveryExecutive
+    GROUP BY DeliveryExecutiveID
+) AS URDE ON DE.DeliveryExecutiveID = URDE.DeliveryExecutiveID
+SET DE.AverageRating = URDE.AvgRating;
+
+-- 7.) Query to Retrieve Notifications for a Specific User (User 5 in this command):
+SELECT Notification.Message
+FROM Notification
+INNER JOIN Notification_Special_Offer_User ON Notification.NotificationID = Notification_Special_Offer_User.NotificationID
+WHERE Notification_Special_Offer_User.UserID = 5;
+
+-- 8.) Query to Delete a Product from a Cart:
+DELETE FROM Product_Cart_Orders
+WHERE ProductID = 5 AND OrderID = 3;
+
+-- 9.) Query to Calculate the Total Revenue from Payments:
+SELECT SUM(Amount) AS TotalRevenue
+FROM Payment;
+
+-- 10.) Query to Find Top 5 Best-Selling Products:
+SELECT P.ProductID, P.Name, SUM(PCO.QuantityToOrder) AS TotalQuantityOrdered
+FROM Product AS P
+JOIN Product_Cart_Orders AS PCO ON P.ProductID = PCO.ProductID
+GROUP BY P.ProductID, P.Name
+ORDER BY TotalQuantityOrdered DESC
+LIMIT 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

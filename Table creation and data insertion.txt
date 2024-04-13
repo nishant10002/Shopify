@@ -1,0 +1,377 @@
+Shop Fresh - The Online Grocery Store
+Commands used for table creation and data insertion
+Name: Nishant Singh (solo project)
+Roll Number: 2022328
+
+-- Create the User table
+CREATE TABLE User (
+    UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    EmailID VARCHAR(100) UNIQUE NOT NULL,
+    MobileNo VARCHAR(20) UNIQUE NOT NULL,
+    Password VARCHAR(50) NOT NULL
+);
+
+-- Insert simulated data into the User table
+INSERT INTO User (FirstName, LastName, EmailID, MobileNo, Password)
+VALUES
+    ('Rajesh', 'Patel', 'rajesh@gmail.com', '9876543210', 'P@$$w0rd123'),
+    ('Priya', 'Sharma', 'priya@yahoo.com', '8765432109', 'Secur3P@ss'),
+    ('Amit', 'Singh', 'amit@gmail.com', '7654321098', 'Passw0rd!'),
+    ('Sneha', 'Verma', 'sneha@yahoo.com', '6543210987', 'LetMeIn123'),
+    ('Deepak', 'Gupta', 'deepak@gmail.com', '5432109876', 'P@ssword456'),
+    ('Pooja', 'Yadav', 'pooja@yahoo.com', '4321098765', 'Qw3rty!23'),
+    ('Anita', 'Kumar', 'anita@gmail.com', '3210987654', '1234abcd'),
+    ('Ravi', 'Mishra', 'ravi@yahoo.com', '2109876543', 'Abc@1234'),
+    ('Meena', 'Joshi', 'meena@gmail.com', '1098765432', 'Welc0me@456'),
+    ('Vivek', 'Rajput', 'vivek@yahoo.com', '0987654321', 'Passw0rd!321');
+
+-- Create the Address table
+CREATE TABLE Address (
+    AddressID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Street VARCHAR(100) NOT NULL,
+    City VARCHAR(50) NOT NULL,
+    State VARCHAR(50) NOT NULL,
+    ZipCode VARCHAR(10) NOT NULL,
+    UserID INT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES User(UserID)
+);
+
+-- Insert simulated data into the Address table
+INSERT INTO Address (Street, City, State, ZipCode, UserID)
+VALUES
+    ('123, ABC Road', 'Mumbai', 'Maharashtra', '400001', 1),
+    ('456, XYZ Street', 'Delhi', 'Delhi', '110001', 2),
+    ('789, PQR Avenue', 'Bangalore', 'Karnataka', '560001', 3),
+    ('234, LMN Lane', 'Kolkata', 'West Bengal', '700001', 4),
+    ('567, JKL Road', 'Chennai', 'Tamil Nadu', '600001', 5),
+    ('890, UVW Street', 'Hyderabad', 'Telangana', '500001', 6),
+    ('345, RST Avenue', 'Pune', 'Maharashtra', '411001', 7),
+    ('678, GHI Lane', 'Ahmedabad', 'Gujarat', '380001', 8),
+    ('901, EFG Road', 'Jaipur', 'Rajasthan', '302001', 9),
+    ('456, NOP Street', 'Lucknow', 'Uttar Pradesh', '226001', 10);
+
+-- Create the DeliveryExecutive table
+CREATE TABLE DeliveryExecutive (
+    DeliveryExecutiveID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    ModeOfTransport VARCHAR(50) NOT NULL,
+    AverageDeliveryTime INT,
+    AverageRating DECIMAL(3, 2)
+);
+
+-- Insert simulated data into the DeliveryExecutive table
+INSERT INTO DeliveryExecutive (FirstName, LastName, ModeOfTransport, AverageDeliveryTime, AverageRating)
+VALUES
+    ('Amit', 'Kumar', 'Bike', 45, 4.5),
+    ('Rahul', 'Singh', 'Cycle', 60, 4.2),
+    ('Sneha', 'Sharma', 'Bike', 50, 4.8),
+    ('Priya', 'Verma', 'Car', 40, 4.6),
+    ('Raj', 'Patil', 'Bike', 55, 4.4),
+    ('Manish', 'Gupta', 'Car', 45, 4.7),
+    ('Sunita', 'Yadav', 'Cycle', 65, 4.3),
+    ('Neha', 'Shah', 'Bike', 50, 4.9),
+    ('Ravi', 'Chauhan', 'Car', 40, 4.5),
+    ('Deepak', 'Sharma', 'Bike', 60, 4.2);
+
+-- Create the Orders table
+CREATE TABLE Orders (
+    OrderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    OrderDate DATE NOT NULL,
+    Status VARCHAR(20) NOT NULL,
+    TotalAmount DECIMAL(10, 2) NOT NULL,
+    UserID INT NOT NULL,
+    DeliveryExecutiveID INT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (DeliveryExecutiveID) REFERENCES DeliveryExecutive(DeliveryExecutiveID)
+);
+
+-- Insert simulated data into the Orders table
+INSERT INTO Orders (OrderDate, Status, TotalAmount, UserID, DeliveryExecutiveID)
+VALUES
+    ('2023-01-01', 'Delivered', 2500.00, 1, 1),
+    ('2023-01-02', 'Processing', 1800.00, 2, 2),
+    ('2023-01-03', 'Out for Delivery', 3200.00, 3, 3),
+    ('2023-01-04', 'Delivered', 1500.00, 4, 4),
+    ('2023-01-05', 'Processing', 2800.00, 5, 5),
+    ('2023-01-06', 'Out for Delivery', 2000.00, 6, 6),
+    ('2023-01-07', 'Delivered', 3700.00, 7, 7),
+    ('2023-01-08', 'Processing', 1900.00, 8, 8),
+    ('2023-01-09', 'Out for Delivery', 3100.00, 9, 9),
+    ('2023-01-10', 'Delivered', 2200.00, 10, 10);
+
+
+-- Create the Payment table
+CREATE TABLE Payment (
+    PaymentID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Amount DECIMAL(10, 2) NOT NULL,
+    PaymentMode VARCHAR(50) NOT NULL,
+    OrderID INT NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+
+-- Insert simulated data into the Payment table
+INSERT INTO Payment (Amount, PaymentMode, OrderID)
+VALUES
+    (2500.00, 'Credit Card', 1),
+    (1800.00, 'Debit Card', 2),
+    (3200.00, 'Cash on Delivery', 3),
+    (1500.00, 'Credit Card', 4),
+    (2800.00, 'Debit Card', 5),
+    (2000.00, 'Cash on Delivery', 6),
+    (3700.00, 'Credit Card', 7),
+    (1900.00, 'Debit Card', 8),
+    (3100.00, 'Cash on Delivery', 9),
+    (2200.00, 'Credit Card', 10);
+
+-- Create the Discount table
+CREATE TABLE Discount (
+    DiscountID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    DiscountCode VARCHAR(50) NOT NULL,
+    DiscountPercentage DECIMAL(5, 2) NOT NULL
+);
+
+-- Insert simulated data into the Discount table
+INSERT INTO Discount (DiscountCode, DiscountPercentage)
+VALUES
+    ('DISCOUNT10', 10.00),
+    ('SALE15', 15.00),
+    ('OFFER20', 20.00),
+    ('SPECIAL25', 25.00),
+    ('DEAL30', 30.00),
+    ('SAVINGS35', 35.00),
+    ('BARGAIN40', 40.00),
+    ('PROMO45', 45.00),
+    ('DISCOUNT50', 50.00),
+    ('SALE55', 55.00);
+
+-- Create the Product table
+CREATE TABLE Product (
+    ProductID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Brand VARCHAR(100),
+    Description TEXT,
+    Image VARCHAR(255),
+    Price DECIMAL(10, 2) NOT NULL,
+    QuantityInStock INT NOT NULL,
+    Category VARCHAR(100),
+    SubCategory VARCHAR(100)
+);
+
+-- Insert simulated data into the Product table
+INSERT INTO Product (Name, Brand, Description, Image, Price, QuantityInStock, Category, SubCategory)
+VALUES
+    ('Rice', 'Daawat', 'Premium Basmati Rice', 'rice.jpg', 50.00, 100, 'Groceries', 'Staples'),
+    ('Cooking Oil', 'Fortune', 'Refined Sunflower Oil', 'cooking_oil.jpg', 120.00, 50, 'Groceries', 'Cooking Essentials'),
+    ('Toothpaste', 'Colgate', 'Anticavity Toothpaste', 'toothpaste.jpg', 80.00, 80, 'Personal Care', 'Oral Care'),
+    ('Shampoo', 'Dove', 'Moisturizing Shampoo', 'shampoo.jpg', 150.00, 30, 'Personal Care', 'Hair Care'),
+    ('Biscuits', 'Parle-G', 'Glucose Biscuits', 'biscuits.jpg', 20.00, 120, 'Snacks', 'Biscuits'),
+    ('Milk', 'Amul', 'Pasteurized Homogenized Milk', 'milk.jpg', 45.00, 200, 'Dairy', 'Milk'),
+    ('Soap', 'Lux', 'Luxury Soap', 'soap.jpg', 30.00, 60, 'Personal Care', 'Body Care'),
+    ('Cereal', 'Kellogg''s', 'Breakfast Cereal', 'cereal.jpg', 100.00, 40, 'Breakfast', 'Cereal'),
+    ('Tea', 'Tata', 'Assam Tea Leaves', 'tea.jpg', 90.00, 70, 'Beverages', 'Tea'),
+    ('Coffee', 'Bru', 'Instant Coffee', 'coffee.jpg', 120.00, 50, 'Beverages', 'Coffee');
+
+-- Create the Retailer table
+CREATE TABLE Retailer (
+    RetailerID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ContactNo VARCHAR(15) NOT NULL,
+    Street VARCHAR(100) NOT NULL,
+    City VARCHAR(100) NOT NULL,
+    State VARCHAR(100) NOT NULL,
+    ZipCode VARCHAR(10) NOT NULL
+);
+
+-- Insert simulated data into the Retailer table
+INSERT INTO Retailer (ContactNo, Street, City, State, ZipCode)
+VALUES
+    ('9876543210', 'MG Road', 'Mumbai', 'Maharashtra', '400001'),
+    ('9123456780', 'Park Street', 'Kolkata', 'West Bengal', '700001'),
+    ('9234567890', 'Brigade Road', 'Bangalore', 'Karnataka', '560001'),
+    ('9345678901', 'Anna Salai', 'Chennai', 'Tamil Nadu', '600001'),
+    ('9456789012', 'Jawaharlal Nehru Road', 'Delhi', 'Delhi', '110001'),
+    ('9567890123', 'Residency Road', 'Hyderabad', 'Telangana', '500001'),
+    ('9678901234', 'Gandhi Road', 'Pune', 'Maharashtra', '411001'),
+    ('9789012345', 'Law Garden Road', 'Ahmedabad', 'Gujarat', '380001'),
+    ('9890123456', 'Raja Ram Mohan Roy Sarani', 'Kolkata', 'West Bengal', '700001'),
+    ('9901234567', 'University Road', 'Lucknow', 'Uttar Pradesh', '226001');
+
+-- Create the Notification table
+CREATE TABLE Notification (
+    NotificationID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Message VARCHAR(255) NOT NULL
+);
+
+-- Insert simulated data into the Notification table
+INSERT INTO Notification (Message)
+VALUES
+    ('Your order has been confirmed.'),
+    ('Your order has been dispatched and is on its way.'),
+    ('Delivery of your order is delayed. Please expect a delay of 1 hour.'),
+    ('Your order has been delivered. Thank you for shopping with us.'),
+    ('Promotional offer: Get 10% off on your next purchase. Use code "SAVE10".'),
+    ('Your payment for order #123456 has been processed.'),
+    ('You have received a refund of Rs. 500 for order #789012.'),
+    ('Your delivery executive is nearby and will arrive shortly.'),
+    ('Special discount: Buy 1 get 1 free on selected items.'),
+    ('Your order #345678 is out for delivery. Estimated delivery time: 30 minutes.');
+
+-- Create the Notification_Special_Offer_User table
+CREATE TABLE Notification_Special_Offer_User (
+    NotificationID INT NOT NULL,
+    UserID INT NOT NULL,
+    PRIMARY KEY (NotificationID, UserID),
+    FOREIGN KEY (NotificationID) REFERENCES Notification(NotificationID),
+    FOREIGN KEY (UserID) REFERENCES User(UserID)
+);
+
+-- Insert simulated data into the Notification_Special_Offer_User table
+INSERT INTO Notification_Special_Offer_User (NotificationID, UserID)
+VALUES
+    (1, 1), -- NotificationID 1 for User 1
+    (5, 2), -- NotificationID 5 for User 2
+    (8, 3), -- NotificationID 8 for User 3
+    (10, 4), -- NotificationID 10 for User 4
+    (3, 5), -- NotificationID 3 for User 5
+    (6, 6), -- NotificationID 6 for User 6
+    (2, 7), -- NotificationID 2 for User 7
+    (4, 8), -- NotificationID 4 for User 8
+    (9, 9), -- NotificationID 9 for User 9
+    (7, 10); -- NotificationID 7 for User 10
+
+-- Create the User_Chat_DeliveryExecutive_Retailer table
+CREATE TABLE User_Chat_DeliveryExecutive_Retailer (
+    UserID INT NOT NULL,
+    DeliveryExecutiveID INT NOT NULL,
+    RetailerID INT NOT NULL,
+    Message VARCHAR(255) NOT NULL,
+    PRIMARY KEY (UserID, DeliveryExecutiveID, RetailerID),
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (DeliveryExecutiveID) REFERENCES DeliveryExecutive(DeliveryExecutiveID),
+    FOREIGN KEY (RetailerID) REFERENCES Retailer(RetailerID)
+);
+
+-- Insert simulated data into the User_Chat_DeliveryExecutive_Retailer table
+INSERT INTO User_Chat_DeliveryExecutive_Retailer (UserID, DeliveryExecutiveID, RetailerID, Message)
+VALUES
+    (1, 1, 1, 'Hi, I would like to inquire about the availability of product XYZ at your store.'),
+    (2, 2, 2, 'Could you please confirm the delivery time for my order #12345?'),
+    (3, 3, 3, 'Hello, I am interested in purchasing multiple items from your store. Can you provide a bulk discount?'),
+    (4, 4, 4, 'Hi, I have received my order #56789, but one item is missing. Can you please check and arrange for delivery?'),
+    (5, 5, 5, 'Good evening, I would like to place an order for product ABC. Do you offer express delivery?'),
+    (6, 6, 6, 'Dear retailer, I have received the wrong item in my order. Please arrange for a replacement.'),
+    (7, 7, 7, 'Hi, I have a query regarding the warranty of the product I purchased from your store.'),
+    (8, 8, 8, 'Hello, I am a delivery executive assigned to deliver an order from your store. Can you confirm the pickup time?'),
+    (9, 9, 9, 'Hi, I am a customer who recently made a purchase from your store. I am extremely satisfied with the product quality.'),
+    (10, 10, 10, 'Dear customer, thank you for your feedback. We strive to provide the best products and services to our customers.');
+
+-- Create the User_Rating_DeliveryExecutive table
+CREATE TABLE User_Rating_DeliveryExecutive (
+    UserID INT NOT NULL,
+    DeliveryExecutiveID INT NOT NULL,
+    StarsGiven INT NOT NULL,
+    PRIMARY KEY (UserID, DeliveryExecutiveID),
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (DeliveryExecutiveID) REFERENCES DeliveryExecutive(DeliveryExecutiveID)
+);
+
+-- Insert simulated data into the User_Rating_DeliveryExecutive table
+INSERT INTO User_Rating_DeliveryExecutive (UserID, DeliveryExecutiveID, StarsGiven)
+VALUES
+    (1, 1, 5), -- User 1 rates Delivery Executive 1 with 5 stars
+    (2, 2, 4), -- User 2 rates Delivery Executive 2 with 4 stars
+    (3, 3, 3), -- User 3 rates Delivery Executive 3 with 3 stars
+    (4, 4, 5), -- User 4 rates Delivery Executive 4 with 5 stars
+    (5, 5, 2), -- User 5 rates Delivery Executive 5 with 2 stars
+    (6, 6, 4), -- User 6 rates Delivery Executive 6 with 4 stars
+    (7, 7, 3), -- User 7 rates Delivery Executive 7 with 3 stars
+    (8, 8, 5), -- User 8 rates Delivery Executive 8 with 5 stars
+    (9, 9, 4), -- User 9 rates Delivery Executive 9 with 4 stars
+    (10, 10, 3); -- User 10 rates Delivery Executive 10 with 3 stars
+
+-- Create the Orders_Apply_Code_Discount table
+CREATE TABLE Orders_Apply_Code_Discount (
+    OrderID INT NOT NULL,
+    DiscountID INT NOT NULL,
+    PRIMARY KEY (OrderID, DiscountID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (DiscountID) REFERENCES Discount(DiscountID)
+);
+
+-- Insert simulated data into the Orders_Apply_Code_Discount table
+INSERT INTO Orders_Apply_Code_Discount (OrderID, DiscountID)
+VALUES
+    (1, 1), -- Order 1 applies Discount 1
+    (2, 2), -- Order 2 applies Discount 2
+    (3, 3), -- Order 3 applies Discount 3
+    (4, 4), -- Order 4 applies Discount 4
+    (5, 5), -- Order 5 applies Discount 5
+    (6, 6), -- Order 6 applies Discount 6
+    (7, 7), -- Order 7 applies Discount 7
+    (8, 8), -- Order 8 applies Discount 8
+    (9, 9), -- Order 9 applies Discount 9
+    (10, 10); -- Order 10 applies Discount 10
+
+-- Create the Product_Cart_Orders table
+CREATE TABLE Product_Cart_Orders (
+    ProductID INT NOT NULL,
+    OrderID INT NOT NULL,
+    QuantityToOrder INT NOT NULL,
+    PRIMARY KEY (ProductID, OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+
+-- Insert simulated data into the Product_Cart_Orders table
+INSERT INTO Product_Cart_Orders (ProductID, OrderID, QuantityToOrder)
+VALUES
+    (1, 1, 2),  -- Product 1 added to Order 1 with a quantity of 2
+    (2, 1, 1),  -- Product 2 added to Order 1 with a quantity of 1
+    (3, 2, 3),  -- Product 3 added to Order 2 with a quantity of 3
+    (4, 2, 1),  -- Product 4 added to Order 2 with a quantity of 1
+    (5, 3, 2),  -- Product 5 added to Order 3 with a quantity of 2
+    (6, 3, 4),  -- Product 6 added to Order 3 with a quantity of 4
+    (7, 4, 1),  -- Product 7 added to Order 4 with a quantity of 1
+    (8, 5, 3),  -- Product 8 added to Order 5 with a quantity of 3
+    (9, 5, 2),  -- Product 9 added to Order 5 with a quantity of 2
+    (10, 5, 1); -- Product 10 added to Order 5 with a quantity of 1
+
+-- Create the Retailer_Modify_stock_Product table
+CREATE TABLE Retailer_Modify_stock_Product (
+    RetailerID INT NOT NULL,
+    ProductID INT NOT NULL,
+    QuantityToAdd INT NOT NULL,
+    QuantityToRemove INT NOT NULL,
+    PRIMARY KEY (RetailerID, ProductID),
+    FOREIGN KEY (RetailerID) REFERENCES Retailer(RetailerID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+-- Insert simulated data into the Retailer_Modify_stock_Product table
+INSERT INTO Retailer_Modify_stock_Product (RetailerID, ProductID, QuantityToAdd, QuantityToRemove)
+VALUES
+    (1, 1, 10, 0),   -- Retailer 1 adds 10 units of Product 1
+    (2, 2, 5, 0),    -- Retailer 2 adds 5 units of Product 2
+    (3, 3, 20, 0),   -- Retailer 3 adds 20 units of Product 3
+    (4, 4, 8, 0),    -- Retailer 4 adds 8 units of Product 4
+    (5, 5, 15, 0),   -- Retailer 5 adds 15 units of Product 5
+    (6, 6, 12, 0),   -- Retailer 6 adds 12 units of Product 6
+    (7, 7, 25, 0),   -- Retailer 7 adds 25 units of Product 7
+    (8, 8, 18, 0),   -- Retailer 8 adds 18 units of Product 8
+    (9, 9, 30, 0),   -- Retailer 9 adds 30 units of Product 9
+    (10, 10, 22, 0); -- Retailer 10 adds 22 units of Product 10
+
+
+
+
+
+
+
+
+
+
+
+
+
