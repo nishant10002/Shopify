@@ -1,6 +1,8 @@
 # Shopify
 The Online Grocery Store Database project aims to establish a B2C application facilitating the seamless purchase of groceries for customers. The system encompasses various functionalities to enhance the shopping experience and ensure efficient management of products, orders, and customer interactions.
 
+### JS and PUG files - _Uploading Soon_
+
 # Business Requirements
 The platform provides users with the ability to create accounts, offering a personalized
 experience with saved preferences and order history. The user signs up using his email
@@ -56,5 +58,3 @@ a means for customers to inquire about products, report issues with orders or de
 or seek assistance. Similarly, retailers can use it to address customer queries regarding
 products received. Delivery executives can be inquired about delays in delivery and
 missing products.
-
-# JS and PUG files - Uploading Soon
