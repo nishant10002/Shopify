@@ -56,3 +56,5 @@ a means for customers to inquire about products, report issues with orders or de
 or seek assistance. Similarly, retailers can use it to address customer queries regarding
 products received. Delivery executives can be inquired about delays in delivery and
 missing products.
+
+# JS and PUG files - Uploading Soon
