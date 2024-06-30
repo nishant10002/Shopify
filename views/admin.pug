@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    title Admin Panel
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    h1 Admin Panel
+    h2 Add New Product
+    form(action='/admin/add_product', method='post')
+      label(for='name') Name:
+      input(type='text', name='name', required)
+      br
+      label(for='brand') Brand:
+      input(type='text', name='brand', required)
+      br
+      label(for='description') Description:
+      input(type='text', name='description', required)
+      br
+      label(for='image') Image URL:
+      input(type='text', name='image', required)
+      br
+      label(for='price') Price:
+      input(type='number', name='price', step='0.01', required)
+      br
+      label(for='quantityInStock') Quantity In Stock:
+      input(type='number', name='quantityInStock', required)
+      br
+      label(for='category') Category:
+      input(type='text', name='category', required)
+      br
+      label(for='subCategory') Sub-Category:
+      input(type='text', name='subCategory', required)
+      br
+      button(type='submit') Add Product
+    h2 Update Product
+    form(action='/admin/update_product', method='post')
+      label(for='productId') Product ID:
+      input(type='number', name='productId', required)
+      br
+      label(for='name') Name:
+      input(type='text', name='name')
+      br
+      label(for='brand') Brand:
+      input(type='text', name='brand')
+      br
+      label(for='description') Description:
+      input(type='text', name='description')
+      br
+      label(for='image') Image URL:
+      input(type='text', name='image')
+      br
+      label(for='price') Price:
+      input(type='number', name='price', step='0.01')
+      br
+      label(for='quantityInStock') Quantity In Stock:
+      input(type='number', name='quantityInStock')
+      br
+      label(for='category') Category:
+      input(type='text', name='category')
+      br
+      label(for='subCategory') Sub-Category:
+      input(type='text', name='subCategory')
+      br
+      button(type='submit') Update Product

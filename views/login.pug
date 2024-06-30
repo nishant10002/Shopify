@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Login
+  body
+    h1 Login
+    form(action='/users/login', method='post')
+      label(for='mobileNo') Mobile Number:
+      input(type='text', name='mobileNo', required)
+      br
+      label(for='password') Password:
+      input(type='password', name='password', required)
+      br
+      button(type='submit') Login
+

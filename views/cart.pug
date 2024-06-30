@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title Cart
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    header
+      .navbar
+        a(href='/') Home
+        a(href='/products') Products
+        a(href='/cart') Cart
+        a(href='/orders') Orders
+        if userId
+          a(href='/logout') Logout
+        else
+          a(href='/login') Login
+    .container
+      h1 Your Cart
+      if cartItems.length
+        table
+          thead
+            tr
+              th Product
+              th Price
+              th Quantity
+              th Subtotal
+              th Actions
+          tbody
+            each item in cartItems
+              tr
+                td #{item.Name}
+                td $#{item.Price}
+                td #{item.Quantity}
+                td $#{item.Price * item.Quantity}
+                td
+                  form(action='/cart/remove', method='post')
+                    input(type='hidden', name='productId', value=item.ProductID)
+                    button(type='submit') Remove
+        h3 Total: $#{cartItems.reduce((total, item) => total + item.Price * item.Quantity, 0)}
+        form(action='/orders/place', method='post')
+          button(type='submit') Place Order
+      else
+        p Your cart is empty.
+      a.continue-shopping(href='/products') Continue Shopping
+    footer
+      p © 2024 Online Grocery Store
+

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Payment History
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    h1 Payment History
+    if payments.length
+      table
+        thead
+          tr
+            th Amount
+            th Payment Method
+            th Order ID
+            th Date
+        tbody
+          each payment in payments
+            tr
+              td $#{payment.Amount}
+              td #{payment.PaymentMode}
+              td #{payment.OrderID}
+              td #{payment.OrderDate}
+    else
+      p You have no payment history.
+    a(href='/') Home

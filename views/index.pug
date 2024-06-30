@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title Online Grocery Store
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    header
+      .navbar
+        a(href='/') Home
+        a(href='/products') Products
+        a(href='/cart') Cart
+        a(href='/orders') Orders
+        if session && session.userId
+          a(href='/logout') Logout
+        else
+          a(href='/login') Login
+          a(href='/signup') Sign Up
+    .container
+      .welcome-section
+        h1.welcome-text Welcome to Shopify : India's One Stop Online Grocery Store
+      img(src='/images/grocery-store.png', alt='Online Grocery Store', style='max-width: 100%; height: auto; margin-top: 20px;')
+    footer
+      p © 2024 Shopify.inc
+
+
+
+

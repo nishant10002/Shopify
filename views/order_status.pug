@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title Order Status
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    h1 Order Status
+    if orders.length
+      table
+        thead
+          tr
+            th Order ID
+            th Date
+            th Status
+            th Total Amount
+        tbody
+          each order in orders
+            tr
+              td #{order.OrderID}
+              td #{order.OrderDate}
+              td #{order.Status}
+              td $#{order.TotalAmount}
+    else
+      p You have no orders.
+    a(href='/') Home
+

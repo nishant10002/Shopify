@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Payment
+    link(rel='stylesheet', href='/css/styles.css')
+  body
+    h1 Select Payment Method
+    form(action='/payment/select', method='post')
+      input(type='hidden', name='orderId', value=orderId)
+      label(for='paymentMethod') Payment Method:
+      select(name='paymentMethod', required)
+        option(value='Credit Card') Credit Card
+        option(value='Debit Card') Debit Card
+        option(value='PayPal') PayPal
+        option(value='Cash on Delivery') Cash on Delivery
+      button(type='submit') Pay Now
+    a(href='/orders/status') View Order Status

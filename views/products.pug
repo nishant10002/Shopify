@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Products
+  body
+    h1 Products
+    each product in products
+      div
+        h2 #{product.Name}
+        p Brand: #{product.Brand}
+        p Description: #{product.Description}
+        p Price: $#{product.Price}
+        p In Stock: #{product.QuantityInStock}
+        form(action='/cart/add', method='post')
+          input(type='hidden', name='productId', value=product.ProductID)
+          label(for='quantity') Quantity:
+          input(type='number', name='quantity', required)
+          button(type='submit') Add to Cart
