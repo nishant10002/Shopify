@@ -9,7 +9,7 @@ This Online Grocery Store project is a comprehensive web application and command
 - Shopping Cart: Users can add items to their cart, view cart contents, and adjust quantities.
 - Order Management: Users can place orders and track their status.
 - Admin Panel: Business owners can manage products, orders, and users.
-- Responsive Design: Ensures optimal viewing on various devices.
+- Responsive Design: Ensures smooth and robust browsing experience.
 
 # Stakeholders
 - Customers
