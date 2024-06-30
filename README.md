@@ -11,7 +11,7 @@ This Online Grocery Store project is a comprehensive web application and command
 - Admin Panel: Business owners can manage products, orders, and users.
 - Responsive Design: Ensures smooth and robust browsing experience.
 
-# Stakeholders
+# Stakeholders:
 - Customers
 - Business Owners/Store Managers
 - Developers/IT Team
