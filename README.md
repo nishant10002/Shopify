@@ -7,7 +7,7 @@ This Online Grocery Store project is a comprehensive web application and command
 ![grocery-store](https://github.com/nishant10002/Shopify/assets/133675507/1a8e6118-b988-48c6-a254-573e2ed159f5)
 
 # Snapshots:
-
+<img scr="./public/images/Screenshot (3028).png" width=600 height=300> 
 
 # Key Features:
 - User Authentication: Users can securely register and log in.
