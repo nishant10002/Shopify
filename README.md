@@ -20,5 +20,3 @@ This Online Grocery Store project is a comprehensive web application and command
 - Developers/IT Team
 - Suppliers
 - Delivery Personnel
-
-## Youtube Link: *Uploading Soon*
